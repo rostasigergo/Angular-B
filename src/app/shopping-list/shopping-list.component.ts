@@ -10,7 +10,7 @@ import { ShoppingListService } from './shopping-list.service';
 
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
-  private subscription: Subscription
+  private subscription: Subscription;
 
   constructor(private slService: ShoppingListService) { }
 
@@ -18,7 +18,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.ingredients = this.slService.getIngredients();
     this.subscription = this.slService.ingredientChanged.subscribe(
       (ingredients: Ingredient[]) => this.ingredients = ingredients
-    )
+    );
   }
 
   ngOnDestroy(){
