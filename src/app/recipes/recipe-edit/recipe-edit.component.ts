@@ -25,20 +25,20 @@ export class RecipeEditComponent implements OnInit {
       });
   }
 
-  onSubmit(){
-    if (this.editMode){
+  onSubmit() {
+    if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-    }else{
+    } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
     this.onCancel();
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
-  onAddIngredient(){
+  onAddIngredient() {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
         'name': new FormControl(null, Validators.required),
@@ -47,23 +47,23 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
-  onDeleteIngredient(index: number){
+  onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
-  private initForm(){
+  private initForm() {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
-    let recipeIngredients = new FormArray([]);
+    const recipeIngredients = new FormArray([]);
 
-    if (this.editMode){
+    if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
-      if (recipe['ingredients']){
-        for (let ingredient of recipe.ingredients){
+      if (recipe['ingredients']) {
+        for (const ingredient of recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
