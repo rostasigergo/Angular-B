@@ -3,7 +3,9 @@ import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/home/home.component';
+
+import { AuthGuard } from './auth/auth-guard.service';
 
 
 const appRoutes: Routes = [
@@ -14,7 +16,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {
 
